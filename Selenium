@@ -1,0 +1,50 @@
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.opera.OperaDriver;
+
+public class AmberTeamClean {
+
+
+
+    public static String browser = "chrome";
+        public static WebDriver driver;
+
+
+    //Wikipedia
+        public static void main(String[] args) throws InterruptedException {
+            if (browser == "chrome") {
+                WebDriverManager.chromedriver().setup();
+                driver = new ChromeDriver();
+
+            } else if (browser == "firefox") {
+                WebDriverManager.firefoxdriver().setup();
+                driver = new FirefoxDriver();
+
+            } else if (browser == "opera") {
+                WebDriverManager.operadriver().setup();
+                driver = new OperaDriver();
+            }
+
+            driver.get("https://antycaptcha.amberteam.pl:5443/exercises/exercise2");
+            WebElement inputText = driver.findElement(By.xpath("//*[@id=\"t14\"]")); //zaznacza pole tekstowe
+            inputText.clear(); // czyszcze pole tekstowe
+            String tekscik = driver.findElement(By.xpath("/html/body/div/table/tbody/tr[2]/td[2]/code[1]")).getText(); //kopiuje pole tekstowe ktore jest zmienne
+            driver.findElement (By.xpath("//*[@id=\"t14\"]")).sendKeys(tekscik ); // wkleja wartosc do pola tekstowego
+
+            driver.findElement(By.xpath("//*[@id=\"btnButton1\"]")).click();
+            Thread.sleep(2000);
+            driver.findElement(By.xpath("//*[@id=\"solution\"]")).click();
+            //Sprawdzanie wyniku:
+           // WebElement solution = driver.findElement(By.xpath("/html/body/div/div[4]/pre/code"));
+            WebElement solution = driver.findElement(By.id("trail"));
+            String textControl = solution.getText();
+            System.out.println(textControl);
+            Assert.assertEquals("OK. Good answer", textControl);
+            
+        }
+    }
