@@ -1,0 +1,57 @@
+
+
+from selenium.webdriver.chrome.webdriver import WebDriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+
+
+driver: WebDriver = webdriver.Chrome(executable_path=r'C:\Users\Mikołaj\Downloads\SDA\Selenium\Nowy folder\chromedriver.exe') #jak w javie, okreslenie przegladarki
+
+driver.get('https://www.youtube.com')
+title = driver.title
+print(title)
+assert 'YouTube' == title
+if title == ('Youtube'):
+    print('ok')
+
+
+
+driver.implicitly_wait(5)
+driver.find_element_by_xpath('//*[@id="search"]').send_keys('O.S.T.R - We Krwi')
+driver.implicitly_wait(5)
+driver.find_element_by_xpath('//*[@id="search-icon-legacy"]').click()
+driver.implicitly_wait(10)
+driver.find_element_by_link_text('O.S.T.R. - We krwi (Since I Saw You) - feat. Playground Zer0 - prod. Killing Skills - cuts DJ Haem').click()
+
+titlefilm = driver.current_url
+print(titlefilm)
+assert 'https://www.youtube.com/watch?v=b80qhH5g_U8' == titlefilm
+if titlefilm == ('https://www.youtube.com/watch?v=b80qhH5g_U8'):
+    print('URL correct')
+wait1 = WebDriverWait(driver, 10)
+
+driver.implicitly_wait(10)
+driver.find_element_by_xpath('//*[@id="movie_player"]').click()
+#logowanie
+driver.maximize_window()
+
+driver.find_element_by_xpath('//*[@id="dismiss-button"]/a').click()
+
+driver.find_element_by_xpath('//*[@id="buttons"]/ytd-button-renderer/a').click()
+wait2 = WebDriverWait(driver, 20)
+driver.find_element_by_id('identifierId').send_keys('#enter your gmail address here')
+driver.find_element_by_id('identifierNext').click()
+wait3 = WebDriverWait(driver, 20)
+driver.find_element_by_css_selector('#password > div.aCsJod.oJeWuf > div > div.Xb9hP > input').send_keys('enter your password here')
+driver.find_element_by_id('passwordNext').click()
+titlefilm2 = driver.current_url
+print(titlefilm2)
+
+if titlefilm2 == ('https://www.youtube.com/watch?v=b80qhH5g_U8'):
+    print('A JEDNAK DZIALA !')
+
+
+
+
+
