@@ -37,10 +37,10 @@ driver.find_element_by_xpath('//*[@id="dismiss-button"]/a').click()
 
 driver.find_element_by_xpath('//*[@id="buttons"]/ytd-button-renderer/a').click()
 wait2 = WebDriverWait(driver, 20)
-driver.find_element_by_id('identifierId').send_keys('m.kornacki.10@gmail.com')
+driver.find_element_by_id('identifierId').send_keys('type your google account's email here')
 driver.find_element_by_id('identifierNext').click()
 wait3 = WebDriverWait(driver, 20)
-driver.find_element_by_css_selector('#password > div.aCsJod.oJeWuf > div > div.Xb9hP > input').send_keys('madafaka1929')
+driver.find_element_by_css_selector('#password > div.aCsJod.oJeWuf > div > div.Xb9hP > input').send_keys('enter your password here')
 driver.find_element_by_id('passwordNext').click()
 
 wait4 = WebDriverWait(driver, 50)
